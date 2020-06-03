@@ -1,0 +1,16 @@
+1. 模型训练入口s2s.py
+2. web端入口sever.py
+3. 客户端入口chart_qt.py
+4. decode_conv.py 将原始数据转换为对话的形式数据，然后保存成sqlite3数据库格式
+    内部实际上就是将原始数据转换为ask和answer的键值对形式，然后存储到sqlite3的db数据库中
+5. data_utils.py 基于db数据生成bucket数据
+
+==========================================
+将文件“seq2seq_tf源码注释版本.py”修改为“seq2seq.py”， 然后放到{PYTHON_HOME}\Lib\site-packages\tensorflow\contrib\legacy_seq2seq\python\ops路径下，替换原始的seq2seq.py文件，建议最好将原始的seq2seq.py复制一个保留一下；
+“seq2seq_tf源码注释版本.py”是加了一些注释的。
+
+==========================================
+1. 将小黄鸡的数据解压放到根目录下("xiaohuangji50w.conv")
+2. 修改decode_conv.py文件内容，并运行
+3. 修改并运行data_utils.py文件，生成分桶的数据
+4. 运行s2s.py文件训练模型
