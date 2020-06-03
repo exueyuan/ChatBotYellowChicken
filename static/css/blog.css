@@ -1,0 +1,141 @@
+@media only screen and (min-width: 1200px) {
+    .blog-g-fixed {
+        max-width: 1200px;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .blog-sidebar {
+        font-size: 1.4rem;
+    }
+}
+
+.blog-main {
+    padding: 20px 0;
+}
+
+.blog-title {
+    margin: 10px 0 20px 0;
+}
+
+.blog-meta {
+    font-size: 14px;
+    margin: 10px 0 20px 0;
+    color: #222;
+}
+
+.blog-meta a {
+    color: #27ae60;
+}
+
+.blog-pagination a {
+    font-size: 1.4rem;
+}
+
+.blog-team li {
+    padding: 4px;
+    margin-right:15px;
+}
+
+.blog-team img {
+    margin-bottom: 0;
+}
+
+.blog-content img,
+.blog-team img {
+    max-width: 100%;
+    height: auto;
+}
+
+.blog-footer {
+    padding: 10px 0;
+    text-align: center;
+}
+.am-g{word-break:break-all;}
+.am-g p{word-break:break-all;}
+
+.line-clamp {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+-webkit-box-orient: vertical;
+}
+
+@media only screen and (min-width: 641px) {
+    .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+    }
+
+    .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .am-offcanvas-bar:after {
+        content: none;
+    }
+
+}
+
+@media only screen and (max-width: 640px) {
+    .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+    }
+
+    .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+    }
+
+    .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+    }
+
+    .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+    }
+
+    .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+    }
+}
+
+.my-head {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.my-button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-radius: 0;
+}
+.my-sidebar {
+    padding-right: 0;
+    border-right: 1px solid #eeeeee;
+}
+
+.my-footer {
+    border-top: 1px solid #eeeeee;
+    padding: 10px 0;
+    margin-top: 10px;
+    text-align: center;
+}
