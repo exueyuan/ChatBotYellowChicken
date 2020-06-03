@@ -145,13 +145,16 @@ def train():
 
     # 数据预处理
     # buckets_dir 训练数据目录
+    # 获取列表，列表里是四个桶，每个桶里有各自的数据库内容
     bucket_dbs = data_utils.read_bucket_dbs(FLAGS.buckets_dir)
+    # 每个桶的数据量添加
     bucket_sizes = []
     for i in range(len(buckets)):
         # 语句的尺寸
         bucket_size = bucket_dbs[i].size  # 不同的桶的数据量
         bucket_sizes.append(bucket_size)
         print('bucket {} 中有数据 {} 条'.format(i, bucket_size))
+    # 所有样本的数目
     total_size = sum(bucket_sizes)  # 获取所有的样本数目
     print('共有数据 {} 条'.format(total_size))
 
@@ -192,6 +195,7 @@ def train():
             '{}/{}'
         ])
 
+        # 设置bars_max跟踪进度
         bars_max = 20
         writer = tf.summary.FileWriter('log', graph=sess.graph)
         merges = []
@@ -202,7 +206,9 @@ def train():
         with tf.device('/gpu:0'):
             for epoch_index in range(1, FLAGS.num_epoch + 1):
                 print('Epoch {}:'.format(epoch_index))
+                # 获取开始的时间
                 time_start = time.time()
+                # 设置开始的进度为 0
                 epoch_trained = 0
                 batch_loss = []
                 while True:
@@ -212,7 +218,7 @@ def train():
                         i for i in range(len(buckets_scale))
                         if buckets_scale[i] > random_number
                     ])
-                    # 获取数据（从随机的桶中获取数据，获取batch_size条数据）
+                    # 获取数据（从随机的桶中获取数据，获取batch_size: 16条数据）
                     data, _ = model.get_batch_data(
                         bucket_dbs,
                         bucket_id
@@ -235,11 +241,17 @@ def train():
 
                     epoch_trained += FLAGS.batch_size
                     batch_loss.append(step_loss)
+                    # 获取现在的时间
                     time_now = time.time()
+                    # 获取经历的时间
                     time_spend = time_now - time_start
+                    # 获取时间的进度
                     time_estimate = time_spend / (epoch_trained / FLAGS.num_per_epoch)
+                    # 获取现在的进度比例
                     percent = min(100, epoch_trained / FLAGS.num_per_epoch) * 100
+                    # bars该显示多少个计算，最多显示20个
                     bars = math.floor(percent / 100 * bars_max)
+                    # 进行输出操作，显示=号，-号的数量不同
                     sys.stdout.write(metrics.format(
                         '=' * int(bars) + '-' * int(bars_max - bars),
                         percent,
@@ -247,6 +259,7 @@ def train():
                         np.mean(batch_loss),
                         data_utils.time(time_spend), data_utils.time(time_estimate)
                     ))
+                    # 进行输出
                     sys.stdout.flush()
                     if summary_merge is not None:
                         writer.add_summary(summary_merge, global_step=epoch_index)
