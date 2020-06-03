@@ -83,7 +83,7 @@ tf.app.flags.DEFINE_integer(
 )
 tf.app.flags.DEFINE_boolean(
     'train',
-    True,
+    False,
     '是否在测试'
 )
 tf.app.flags.DEFINE_string(
