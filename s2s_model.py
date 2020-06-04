@@ -31,27 +31,34 @@ class S2SModel(object):
         self.batch_size = batch_size
         self.learning_rate = learning_rate
         # LSTM cells(Multi RNN Cell, num_layers)
+        # 定义多层 lstm cell细胞
         cell = rnn.BasicLSTMCell(size)
         cell = rnn.DropoutWrapper(cell, output_keep_prob=dropout)
         cell = rnn.MultiRNNCell([cell] * num_layers)
+        # 定义一个字典，默认value为list的字典
         self.bucket_to_summary_list = defaultdict(list)
 
+        # 设定 输出映射
         output_projection = None
+        # 设定 交叉熵损失函数，采用负采样损失函数
         softmax_loss_function = None
 
         # 如果vocabulary太大，我们还是按照vocabulary来sample的话，内存会爆
         if num_samples > 0 and num_samples < self.target_vocab_size:
             print('开启投影：{}'.format(num_samples))
+            # 投影，字符数，负采样的数
             w_t = tf.get_variable("proj_w", dtype=dtype,
                                   shape=[self.target_vocab_size, size])
-
+            # 进行转制操作
             w = tf.transpose(w_t)
+            # 设置 偏置项 b
             b = tf.get_variable(
                 "proj_b",
                 [self.target_vocab_size],
                 dtype=dtype
             )
 
+            # 预测过程中，设置投影，由小变大
             output_projection = (w, b)  # 仅在预测过程中使用，训练过程中不使用
 
             # 损失函数
