@@ -67,4 +67,4 @@ with tf.Graph().as_default():
         return jsonify({'state': 0, 'result': ret})
 
 if __name__ == '__main__':
-    app.run(host="192.168.1.9",port="8888")
+    app.run(host="192.168.1.9", port="8888")
